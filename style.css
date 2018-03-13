@@ -1,0 +1,21 @@
+body {
+    height: 100%;
+    background-color: #303030;
+    font-family:verdana;
+}
+
+h1  {
+    color: red;
+}
+
+h2  {
+    color: lightgrey;
+}
+
+h5  {
+    color: grey;
+}
+
+p   {
+    color: lightgrey;
+}
