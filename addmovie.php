@@ -1,25 +1,25 @@
 <?php
     session_start();
-    session_unset();
-
     $pdo = new PDO('mysql:host=localhost;dbname=movie2k', 'moviesql', 'toor');
+
     if(isset($_POST["register"])) {
-        $password = $_POST['password'] /*password_hash($_POST['password'], PASSWORD_BCRYPT)*/;
+        $password = $_POST['password'];
+        $username = $_POST['username'];
         $registersql = "insert into user (username, password) values (?, ?)";
         $statement = $pdo->prepare($registersql);
-        $statement->execute(array($_POST['username'], $password));
+        $statement->execute(array($username, password_hash($password)));
         $_SESSION['username'] = $_POST['username'];
         header("location: ./index.php");
         die("Login successful.");
     }
+
     if(isset($_POST["login"])) {
-        $password = $_POST['password'] /*password_hash($_POST['password'], PASSWORD_BCRYPT)*/;
         $loginsql = "select username, password from user where username = ? and password = ?";
         $statement = $pdo->prepare($loginsql);
-        $statement->execute(array($_POST['username'], $password));
+        $statement->execute(array($_POST['username'], $_POST['password']));
         while($row = $statement->fetch()) {
             if($row['username'] == NULL){
-                echo "Wrong Login.";
+                alert("Wrong Login.");
             } else {
                 $_SESSION['username'] = $_POST['username'];
                 header("location: ./index.php");
@@ -47,5 +47,10 @@
                 </form>
             </div>
         </div>
+        <?php
+        function alert($msg) {
+            echo "<script type='text/javascript'>alert('$msg');</script>";
+        }
+        ?>
     </body>
 </html>

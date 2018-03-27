@@ -6,15 +6,11 @@ body {
 
 h1 {
     color: white;
-    margin-top: -10px;
-    font-size: 50px;
     text-align:center;
 }
 
 h2 {
     color: #dcdcdc;
-    margin-top: 20px;
-    font-size: 35px;
     text-align: center;
 }
 
@@ -33,7 +29,6 @@ iframe {
     margin: auto;
 	border: black solid 1px;
 }
-
 .main {
 	position: relative;
     /*margin: 1% 1% auto 1%;*/
@@ -54,7 +49,8 @@ iframe {
 .centerbox {
     position: relative;
     margin: 0 auto;
-    width: 40%;
+    width: 240px;
+	padding: 20px;
 }
 
 .select-button {

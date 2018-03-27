@@ -11,7 +11,6 @@ create table genre (
 create table user (
 	uid integer auto_increment,
     username varchar(16),
-    email varchar(64),
     password varchar(512),
     primary key(uid)
 );
@@ -60,6 +59,8 @@ set name = 'Spirited Away',
 	genrefk = '4';
 
 
+create user 'moviesql'@'localhost' identified by 'toor';
+grant select, insert on movie2k.* to moviesql@localhost;
 /*
 (1,'Deadpool','8/10 Stars | 1h 48min | Action, Adventure, Comedy | 12 February 2016 (USA)','1953-04-01'),
 (2,'Get Out','Müller','1982-09-28'),
@@ -74,11 +75,11 @@ drop database movie2k;
 truncate movie;
 
 drop user moviesql@localhost;
-create user 'moviesql'@'localhost' identified by 'toor';
 grant select, insert
 on movie2k.*
 to moviesql@localhost;
 
 
 select name, subtitle, description, trailer from movie where mid = 4;
+select username, password from user where username = 'boi' and password = '123';
 */

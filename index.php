@@ -1,12 +1,10 @@
 <?php
     session_start();
-    $mid = $_SESSION['saved'];
-    $name = $_SESSION['username'];
-    if(!isset($name)) {
-        header("Location: ./login.php");
-        die("Redirecting to login site");
-    } else {
-        $name = $_SESSION['username'];
+    @$mid = $_SESSION['saved'];
+    @$name = $_SESSION['username'];
+    if(!isset($name)){
+        header("location: ./login.php");
+        die("kys");
     }
 ?>
 <!DOCTYPE html>
@@ -18,12 +16,16 @@
     </head>
     <body>
         <div class="moviebox">
-            <p><?php echo "Logged in as $name  $mid"?></p>
+            <h1>Movies</h1>
+            <p><?php echo "Logged in as $name"?>
             <a class="select-button" href=".\logout.php">Logout</a>
+            <a class="select-button" href=".\addmovie.php">Add Movie</a></p>
+        </div>
+        <div class="main">
             <form class="dropdown" method="POST">
                 <div class="select-style">
                     <select name="dropdown">
-                        <option value="default" selected disabled hidden>Category</option>
+                        <option value="1" selected disabled hidden>Category</option>
                         <option value="1">Comedy</option>
                         <option value="2">Horror</option>
                         <option value="3">Sci-Fi</option>
@@ -32,9 +34,6 @@
                 </div>
                 <button class="select-button" type="Submit" name="Submit">Submit</button>
             </form>
-        </div>
-        <h1>Movies</h1>
-        <div class="main">
             <?php
                 if(isset($_POST["Submit"])) {
                     $mid = $_POST['dropdown'];
