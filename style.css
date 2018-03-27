@@ -51,20 +51,34 @@ iframe {
 	padding: 20px;
 }
 
+.centerbox {
+    position: relative;
+    margin: 0 auto;
+    width: 40%;
+}
+
 .select-button {
+    /*
     margin-top: -30px;
     margin-left: 130px;
+    */
+    text-decoration: none;
+    margin: right;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 3px;
     color: black;
     padding: 5px 18px;
-    position: absolute;
+    position: relative;
 }
 
+
 .select-style {
+    /*
     margin-top: -70px;
     margin-left: 20px;
+    */
+    margin: right;
     padding: 0;
     border: 1px solid #ccc;
     width: 90px;
