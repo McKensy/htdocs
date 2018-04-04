@@ -12,21 +12,6 @@
         header("location: ./index.php");
         die("Login successful.");
     }
-
-    if(isset($_POST["login"])) {
-        $loginsql = "select username, password from user where username = ? and password = ?";
-        $statement = $pdo->prepare($loginsql);
-        $statement->execute(array($_POST['username'], $_POST['password']));
-        while($row = $statement->fetch()) {
-            if($row['username'] == NULL){
-                alert("Wrong Login.");
-            } else {
-                $_SESSION['username'] = $_POST['username'];
-                header("location: ./index.php");
-                die("Login successful.");
-            }
-        }
-    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,13 +22,23 @@
     </head>
     <body>
         <div class="main">
-            <h1>Login / Registration</h1>
+            <h1>Add a movie</h1>
             <div class="centerbox">
                 <form action="./login.php" method="post">
-                    <p>Username:    <input type="text" name="username" placeholder="Enter Username" maxlength="16" required/> </p>
-                    <p>Password:    <input type="password" name="password" placeholder="Enter Password" maxlength="64" required/> </p>
-                    <input class="select-button" name="login" type="submit" value="Login"/>
-                    <input class="select-button" name="register" type="submit" value="Register"/>
+                    <p>Name:    <input type="text" name="username" placeholder="Enter Username" maxlength="16" required/> </p>
+                    <p>Subtitle:    <input type="password" name="password" placeholder="Enter Password" maxlength="64" required/> </p>
+                    <p>Description:    <input type="password" name="password" placeholder="Enter Password" maxlength="64" required/> </p>
+                    <p>Video-embed link:    <input type="password" name="password" placeholder="Enter Password" maxlength="64" required/> </p>
+                    <div class="select-style">
+                        <select name="dropdown">
+                            <option value="" selected disabled hidden>Category</option>
+                            <option value="1">Comedy</option>
+                            <option value="2">Horror</option>
+                            <option value="3">Sci-Fi</option>
+                            <option value="4">Animation</option>
+                        </select>
+                    </div>
+                    <input class="select-button" name="submit" type="submit" value="Submit"/>
                 </form>
             </div>
         </div>

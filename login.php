@@ -4,26 +4,31 @@
 
     $pdo = new PDO('mysql:host=localhost;dbname=movie2k', 'moviesql', 'toor');
     if(isset($_POST["register"])) {
-        $password = $_POST['password'] /*password_hash($_POST['password'], PASSWORD_BCRYPT)*/;
-        $registersql = "insert into user (username, password) values (?, ?)";
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        $registersql = "insert ignore into user (username, password) values (?, ?)";
         $statement = $pdo->prepare($registersql);
         $statement->execute(array($_POST['username'], $password));
-        $_SESSION['username'] = $_POST['username'];
-        header("location: ./index.php");
-        die("Login successful.");
+        if ($pdo->query($registersql) === TRUE){
+            $_SESSION['username'] = $_POST['username'];
+            header("location: ./index.php");
+            die("Login successful.");
+        } else {
+            echo 'Error while connection to database...<br>';
+        }
     }
     if(isset($_POST["login"])) {
-        $password = $_POST['password'] /*password_hash($_POST['password'], PASSWORD_BCRYPT)*/;
-        $loginsql = "select username, password from user where username = ? and password = ?";
-        $statement = $pdo->prepare($loginsql);
-        $statement->execute(array($_POST['username'], $password));
+        $username = $_POST['username'];
+        $verifylogin = "select * from user where username = '$username'";
+        $result = $pdo->query($verifylogin);
+        $statement = $pdo->prepare($verifylogin);
+        $statement->execute();
         while($row = $statement->fetch()) {
-            if($row['username'] == NULL){
-                echo "Wrong Login.";
-            } else {
+            if(password_verify($_POST['password'], $row['password'])){
                 $_SESSION['username'] = $_POST['username'];
                 header("location: ./index.php");
                 die("Login successful.");
+            } else {
+                echo "<h2>User or Password wrong. Try again.</h2>";
             }
         }
     }
