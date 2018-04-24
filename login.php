@@ -8,13 +8,16 @@
         $registersql = "insert ignore into user (username, password) values (?, ?)";
         $statement = $pdo->prepare($registersql);
         $statement->execute(array($_POST['username'], $password));
-        if ($pdo->query($registersql) === TRUE){
+        /*if ($pdo->query($registersql) === TRUE){
             $_SESSION['username'] = $_POST['username'];
             header("location: ./index.php");
             die("Login successful.");
         } else {
             echo 'Error while connection to database...<br>';
-        }
+        }*/
+        $_SESSION['username'] = $_POST['username'];
+        header("location: ./index.php");
+        die("Login successful.");
     }
     if(isset($_POST["login"])) {
         $username = $_POST['username'];

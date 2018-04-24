@@ -1,15 +1,15 @@
 <?php
     session_start();
-    $pdo = new PDO('mysql:host=localhost;dbname=movie2k', 'moviesql', 'toor');
+    $pdo = new PDO('mysql:host=localhost;dbname=movie2k', 'moviesql', 'toor'); /* SAVE IN A SEPERATE FILE PLS */
     @$name = $_SESSION['username'];
     if(!isset($name)){
         header("location: ./login.php");
         die("kys");
     }
-    if(isset($_POST["submit"])) {
-        $insertmoviesql = "INSERT INTO `movie` (`name`, `subtitle`, `description`, `trailer`, `genrefk`, `entrycreatorfk`) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    if(isset($_POST["Submit"])) {
+        $insertmoviesql = "INSERT INTO `movie` (`mid`, `name`, `subtitle`, `description`, `trailer`, `genrefk`, `entrycreatorfk`) VALUES (NULL, ?, ?, ?, ?, ?, ?);";
         $statement = $pdo->prepare($insertmoviesql);
-        $statement->execute(array($_POST["moviename"], $_POST["subtitle"], $_POST["description"], $_POST["trailer"], $_POST["dropdown"], 6));
+        $statement->execute(array($_POST["moviename"], $_POST["subtitle"], $_POST["description"], $_POST["trailer"], $_POST["dropdown"], '11'));
         header("location: ./index.php");
         die("Login successful.");
     }
