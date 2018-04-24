@@ -31,7 +31,7 @@
       <nav>
           <div class="nav-wrapper teal lighten-2">
               <a href="#">  Logged in as <?php echo $name ?></a>
-              <a href=".\" class="brand-logo center">Movies</a>
+              <a href=".\" class="brand-logo center">Movie2k</a>
               <ul id="nav-mobile" class="right">
                   <li><a href=".\logout.php">Logout</a></li>
                   <li><a href="#">Add Movie</a></li>
@@ -41,7 +41,6 @@
         <div class="container">
           <div class="card-panel" style="margin: 1% 1% 1% 1%">
             <h3 class="center">Add a movie</h3>
-            <div class="centerbox" style="margin: 1% 1% 1% 1%">
                 <form action="./addmovie.php" method="post">
                     <p>Name:    <input type="text" name="moviename" class="validate" placeholder="The name of the Movie" maxlength="64" required/> </p>
                     <p>Subtitle:    <input type="text" name="subtitle" placeholder="Example: 7.7/10 Stars | 1h 44min | Horror, Mystery, Thriller | 24 February 2017 (USA)" maxlength="64" required/> </p>
@@ -58,7 +57,6 @@
                     </div>
                     <button class="btn waves-effect waves-light" type="Submit" name="Submit">Submit<i class="material-icons right">send</i></button>
                 </form>
-            </div>
           </div>
         </div>
         <?php

@@ -24,7 +24,7 @@
         <nav>
             <div class="nav-wrapper teal lighten-2">
                 <a href=".\">  Logged in as <?php echo $name ?></a>
-                <a href="#" class="brand-logo center">Movies</a>
+                <a href="#" class="brand-logo center">Movie2k</a>
                 <ul id="nav-mobile" class="right">
                     <li><a href=".\logout.php">Logout</a></li>
                     <li><a href=".\addmovie.php">Add Movie</a></li>

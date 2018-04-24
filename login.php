@@ -39,21 +39,40 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="style.css">
-        <title>Movie2k</title>
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Font awesome link-->
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+      <title>Movie2k</title>
     </head>
-    <body>
-        <div class="main">
-            <h1>Login / Registration</h1>
-            <div class="centerbox">
-                <form action="./login.php" method="post">
-                    <p>Username:    <input type="text" name="username" placeholder="Enter Username" maxlength="16" required/> </p>
-                    <p>Password:    <input type="password" name="password" placeholder="Enter Password" maxlength="64" required/> </p>
-                    <input class="select-button" name="login" type="submit" value="Login"/>
-                    <input class="select-button" name="register" type="submit" value="Register"/>
-                </form>
-            </div>
+    <body style="background-color: #555555">
+      <nav>
+        <div class="nav-wrapper teal lighten-2">
+          <a href=".\" class="brand-logo center">Movie2k</a>
+        </div>
+      </nav>
+        <div class="container">
+          <div class="card-panel" style="margin: 1% 1% 1% 1%">
+            <h3 class="center">Login / Registration</h3>
+              <form action="./login.php" method="post">
+                  <div class="row">
+                    <div class="input-field col s12 m6 l6">
+                      <input placeholder="Username" type="text" name="username" class="validate" maxlength="16" required>
+                    </div>
+                    <div class="input-field col s12 m6 l6">
+                      <input placeholder="Enter Password" type="password" name="password" class="validate"  maxlength="64" required>
+                    </div>
+                  </div>
+                  <div class="center">
+                    <button class="btn waves-effect waves-light" type="Submit" name="login" value="Login">Login</button>
+                    <button class="btn waves-effect waves-light" type="Submit" name="register" value="Register">Register</button>
+                  </div>
+              </form>
+          </div>
         </div>
     </body>
 </html>
