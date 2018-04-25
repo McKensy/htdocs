@@ -23,53 +23,63 @@
     <body style="background-color: #555555;">
         <nav>
             <div class="nav-wrapper teal lighten-2">
-                <a href=".\">  Logged in as <?php echo $name ?></a>
-                <a href="#" class="brand-logo center">Movie2k</a>
+                <a href="./" class="brand-logo center">Movie2k</a>
+                <ul id="nav-mobile">
+                    <li><a href=".\addmovie.php">Add Movie</a></li>
+                    <li><a href=".\showmovie.php">All Movies</a></li>
+                </ul>
                 <ul id="nav-mobile" class="right">
                     <li><a href=".\logout.php">Logout</a></li>
-                    <li><a href=".\addmovie.php">Add Movie</a></li>
+                    <li><a href="#"><?php echo $name ?></a></li>
                 </ul>
             </div>
         </nav>
               <div class="row container">
-                  <div class="card-panel col s12 m12 l3 center" style="margin: 1% 1% 1% 1%">
-                    <div class="row">
+                  <div class="card-panel col s12 m12 l3 center" style="margin: 1%">
+                    <div class="row center">
                       <form method="POST">
-                          <div class="input-field hoverable">
+                          <div class="input-field hoverable" style="margin: 7%">
                               <select name="dropdown" class="browser-default">
-                                  <option value="0" disabled selected>Choose your option</option>
+                                  <option value="" disabled selected>Choose your option</option>
                                   <option value="1">Comedy</option>
                                   <option value="2">Horror</option>
                                   <option value="3">Sci-Fi</option>
                                   <option value="4">Animation</option>
                               </select>
-                            </div>
+                          </div>
                         <button class="btn waves-effect waves-light" type="Submit" name="Submit">Submit<i class="material-icons right">send</i></button>
                       </form>
                     </div>
                   </div>
-                    <div class="card-panel col s12 m12 l8 center" style="margin: 1% 1% 1% 1%">
                       <?php
                           if(isset($_POST["Submit"])) {
-                              $mid = $_POST['dropdown'];
-                              $_SESSION['saved'] = $mid;
+                              if(!isset($_POST["dropdown"])) {
+                                  unset($mid);
+                                  echo "<div class=\"card-panel col s12 m12 l8 right\" style=\"margin: 1%\">";
+                                  echo "<h3 class=\"center-align\">Bitte wählen sie einen Film aus!</h3></div>";
+                              }
+                              else {
+                                  $mid = $_POST['dropdown'];
+                                  $_SESSION['saved'] = $mid;
+                              }
                           }
                           function echomovie($mid) {
                               $pdo = new PDO('mysql:host=localhost;dbname=movie2k', 'moviesql', 'toor');
-                              $sql = "SELECT m.name, m.subtitle, m.description, m.trailer, g.genre FROM movie as m, genre as g WHERE m.mid = $mid AND m.genrefk = g.gid";
+                              $sql = "SELECT m.name, m.subtitle, m.description, m.trailer, g.genre FROM movie as m, genre as g WHERE g.gid = $mid AND m.genrefk = g.gid";
                               foreach ($pdo->query($sql) as $row) {
-                                  echo "<h2 class=\"center-align\">".$row['genre'].": ".$row['name']."</h2>";
+                                  echo "<div class=\"card-panel col s12 m12 l8 right\" style=\"margin: 1%\">";
+                                  echo "<h3 class=\"center-align\">".$row['genre'].": ".$row['name']."</h3>";
                                   echo "<h5 class=\"center-align\">".$row['subtitle']."</h5>";
                                   echo "<blockquote>".$row['description']."</blockquote>";
                                   echo "<div class=\"video-container\" style=\"margin-bottom: 1%;\"><iframe src=\"".$row['trailer']."\"  width=\"853\" height=\"480\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe></div>";
                                   /*echo "<p>Date of refresh: ".date("d.m.Y H:i:s")."<p>";*/
+                                  echo "</div>";
                               }
                           }
                           if(isset($mid)){
                               echomovie($mid);
                           }
                       ?>
-                    </div>
               </div>
 
         <!--JavaScript at end of body for optimized loading-->

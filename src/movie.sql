@@ -66,6 +66,7 @@ flush privileges;
 select * from user;
 insert ignore into user (username, password) values('hash4', 'yes');
 INSERT INTO `movie` (`name`, `subtitle`, `description`, `trailer`, `genrefk`, `entrycreatorfk`) VALUES ('dass', 'dsad', 'dsadasd', 'addsa', '32132', 3, 10);
+INSERT INTO `movie` (`mid`, `name`, `subtitle`, `description`, `trailer`, `genrefk`, `entrycreatorfk`) VALUES (NULL, 'Kimi no na wa', 'veri gud', 'Is a timewarping lovestory', 'https:yourapudopa', '1', '10');
 /*
 (1,'Deadpool','8/10 Stars | 1h 48min | Action, Adventure, Comedy | 12 February 2016 (USA)','1953-04-01'),
 (2,'Get Out','Müller','1982-09-28'),

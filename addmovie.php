@@ -28,35 +28,38 @@
       <title>Movie2k</title>
     </head>
     <body style="background-color: #555555">
-      <nav>
-          <div class="nav-wrapper teal lighten-2">
-              <a href="#">  Logged in as <?php echo $name ?></a>
-              <a href=".\" class="brand-logo center">Movie2k</a>
-              <ul id="nav-mobile" class="right">
-                  <li><a href=".\logout.php">Logout</a></li>
-                  <li><a href="#">Add Movie</a></li>
-              </ul>
-          </div>
-      </nav>
+        <nav>
+            <div class="nav-wrapper teal lighten-2">
+                <a href="./" class="brand-logo center">Movie2k</a>
+                <ul id="nav-mobile">
+                    <li><a href=".\addmovie.php">Add Movie</a></li>
+                    <li><a href=".\showmovie.php">All Movies</a></li>
+                </ul>
+                <ul id="nav-mobile" class="right">
+                    <li><a href=".\logout.php">Logout</a></li>
+                    <li><a href="#"><?php echo $name ?></a></li>
+                </ul>
+            </div>
+        </nav>
         <div class="container">
           <div class="card-panel" style="margin: 1% 1% 1% 1%">
             <h3 class="center">Add a movie</h3>
-                <form action="./addmovie.php" method="post">
-                    <p>Name:    <input type="text" name="moviename" class="validate" placeholder="The name of the Movie" maxlength="64" required/> </p>
-                    <p>Subtitle:    <input type="text" name="subtitle" placeholder="Example: 7.7/10 Stars | 1h 44min | Horror, Mystery, Thriller | 24 February 2017 (USA)" maxlength="64" required/> </p>
-                    <p>Description:    <input type="text" name="description" placeholder="A little description of the movie." maxlength="512" required/> </p>
-                    <p>Video-embed link:    <input type="text" name="trailer" placeholder="Example: https://www.youtube.com/embed/watch?v=-40fLtf9Hio" maxlength="128" required/> </p>
-                    <div class="input-field hoverable">
-                        <select name="dropdown" class="browser-default" required>
-                            <option value="0" selected disabled>Category</option>
-                            <option value="1">Comedy</option>
-                            <option value="2">Horror</option>
-                            <option value="3">Sci-Fi</option>
-                            <option value="4">Animation</option>
-                        </select>
-                    </div>
-                    <button class="btn waves-effect waves-light" type="Submit" name="Submit">Submit<i class="material-icons right">send</i></button>
-                </form>
+              <form action="./addmovie.php" method="post">
+                  <p>Name:    <input type="text" name="moviename" class="validate" placeholder="The name of the Movie" maxlength="64" required/> </p>
+                  <p>Subtitle:    <input type="text" name="subtitle" placeholder="Example: 7.7/10 Stars | 1h 44min | Horror, Mystery, Thriller | 24 February 2017 (USA)" maxlength="64" required/> </p>
+                  <p>Description:    <input type="text" name="description" placeholder="A little description of the movie." maxlength="512" required/> </p>
+                  <p>Video-embed link:    <input type="text" name="trailer" placeholder="Example: https://www.youtube.com/embed/watch?v=-40fLtf9Hio" maxlength="128" required/> </p>
+                  <div class="input-field hoverable">
+                      <select name="dropdown" class="browser-default" required>
+                          <option value="0" selected disabled>Category</option>
+                          <option value="1">Comedy</option>
+                          <option value="2">Horror</option>
+                          <option value="3">Sci-Fi</option>
+                          <option value="4">Animation</option>
+                      </select>
+                  </div>
+                  <button class="btn waves-effect waves-light" type="Submit" name="Submit">Submit<i class="material-icons right">send</i></button>
+              </form>
           </div>
         </div>
         <?php

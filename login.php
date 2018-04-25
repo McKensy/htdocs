@@ -1,23 +1,23 @@
 <?php
     session_start();
-    session_unset();
 
     $pdo = new PDO('mysql:host=localhost;dbname=movie2k', 'moviesql', 'toor');
     if(isset($_POST["register"])) {
-        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-        $registersql = "insert ignore into user (username, password) values (?, ?)";
-        $statement = $pdo->prepare($registersql);
-        $statement->execute(array($_POST['username'], $password));
-        /*if ($pdo->query($registersql) === TRUE){
+        $proof = "SELECT * FROM user WHERE username=?";
+        $proofstatement = $pdo->prepare($proof);
+        $proofstatement->execute(array($_POST['username']));
+        if ($proofstatement->fetch() > 0) {
+            $_SESSION['errormessage'] = "Username already exists!";
+            header("location: ./login.php");
+        }else{
+            $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+            $registersql = "insert into user (username, password) values (?, ?)";
+            $statement = $pdo->prepare($registersql);
+            $statement->execute(array($_POST['username'], $password));
             $_SESSION['username'] = $_POST['username'];
             header("location: ./index.php");
             die("Login successful.");
-        } else {
-            echo 'Error while connection to database...<br>';
-        }*/
-        $_SESSION['username'] = $_POST['username'];
-        header("location: ./index.php");
-        die("Login successful.");
+        }
     }
     if(isset($_POST["login"])) {
         $username = $_POST['username'];
@@ -31,7 +31,8 @@
                 header("location: ./index.php");
                 die("Login successful.");
             } else {
-                echo "<h2>User or Password wrong. Try again.</h2>";
+                $_SESSION['errormessage'] = "Wrong Username or Password!";
+                header("location: ./login.php");
             }
         }
     }
@@ -60,18 +61,25 @@
             <h3 class="center">Login / Registration</h3>
               <form action="./login.php" method="post">
                   <div class="row">
-                    <div class="input-field col s12 m6 l6">
+                      <div class="col m2 l3 left"></div>
+                    <div class="input-field col s12 m4 l3">
                       <input placeholder="Username" type="text" name="username" class="validate" maxlength="16" required>
                     </div>
-                    <div class="input-field col s12 m6 l6">
+                    <div class="input-field col s12 m4 l3">
                       <input placeholder="Enter Password" type="password" name="password" class="validate"  maxlength="64" required>
                     </div>
+                     <div class="col m2 l3 right"></div>
                   </div>
                   <div class="center">
                     <button class="btn waves-effect waves-light" type="Submit" name="login" value="Login">Login</button>
                     <button class="btn waves-effect waves-light" type="Submit" name="register" value="Register">Register</button>
                   </div>
               </form>
+              <?php
+                if(isset($_SESSION['errormessage'])){
+                    echo "<p class=\"center\" style=\"font-size: 1.3em;\">".$_SESSION['errormessage']."</p>";
+                }
+              ?>
           </div>
         </div>
     </body>
