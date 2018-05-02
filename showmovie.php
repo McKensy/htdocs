@@ -1,6 +1,8 @@
 <?php
     session_start();
+    include './pdo.php';
     @$name = $_SESSION['username'];
+    $activenav = 'showmovie';
     if(!isset($name)){
         header("location: ./login.php");
         die("kys");
@@ -20,22 +22,9 @@
         <title>Movie2k</title>
     </head>
     <body style="background-color: #555555;">
-        <nav>
-            <div class="nav-wrapper teal lighten-2">
-                <a href="./" class="brand-logo center">Movie2k</a>
-                <ul id="nav-mobile">
-                    <li><a href=".\addmovie.php">Add Movie</a></li>
-                    <li><a href=".\showmovie.php">All Movies</a></li>
-                </ul>
-                <ul id="nav-mobile" class="right">
-                    <li><a href=".\logout.php">Logout</a></li>
-                    <li><a href="#"><?php echo $name ?></a></li>
-                </ul>
-            </div>
-        </nav>
+        <?php include './nav.php'; ?>
               <div class="row container">
                       <?php
-                          $pdo = new PDO('mysql:host=localhost;dbname=movie2k', 'moviesql', 'toor');
                           $sql = "SELECT m.name, m.subtitle, m.description, m.trailer, g.genre FROM movie as m, genre as g WHERE m.genrefk = g.gid";
                           foreach ($pdo->query($sql) as $row) {
                               echo "<div class=\"card-panel col s12 m12 l12 left\" style=\"margin: 1%\">";

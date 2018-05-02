@@ -1,7 +1,8 @@
 <?php
     session_start();
-    $pdo = new PDO('mysql:host=localhost;dbname=movie2k', 'moviesql', 'toor'); /* SAVE IN A SEPERATE FILE PLS */
+    include './pdo.php';
     @$name = $_SESSION['username'];
+    $activenav = 'addmovie';
     if(!isset($name)){
         header("location: ./login.php");
         die("kys");
@@ -28,19 +29,7 @@
       <title>Movie2k</title>
     </head>
     <body style="background-color: #555555">
-        <nav>
-            <div class="nav-wrapper teal lighten-2">
-                <a href="./" class="brand-logo center">Movie2k</a>
-                <ul id="nav-mobile">
-                    <li><a href=".\addmovie.php">Add Movie</a></li>
-                    <li><a href=".\showmovie.php">All Movies</a></li>
-                </ul>
-                <ul id="nav-mobile" class="right">
-                    <li><a href=".\logout.php">Logout</a></li>
-                    <li><a href="#"><?php echo $name ?></a></li>
-                </ul>
-            </div>
-        </nav>
+        <?php include './nav.php'; ?>
         <div class="container">
           <div class="card-panel" style="margin: 1% 1% 1% 1%">
             <h3 class="center">Add a movie</h3>

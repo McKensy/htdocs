@@ -1,7 +1,9 @@
 <?php
     session_start();
-
-    $pdo = new PDO('mysql:host=localhost;dbname=movie2k', 'moviesql', 'toor');
+    include './pdo.php';
+    /*if ($pdo->connect_error) {
+        die("Connection failed: " . $pdo->connect_error);
+    }*/
     if(isset($_POST["register"])) {
         $proof = "SELECT * FROM user WHERE username=?";
         $proofstatement = $pdo->prepare($proof);
@@ -30,7 +32,7 @@
                 $_SESSION['username'] = $_POST['username'];
                 header("location: ./index.php");
                 die("Login successful.");
-            } else {
+            }else {
                 $_SESSION['errormessage'] = "Wrong Username or Password!";
                 header("location: ./login.php");
             }
